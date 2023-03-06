@@ -45,8 +45,10 @@ int Math::Add(int count,...) {
 }
 #include <cstring>
 
-char* Add(const char* str1, const char* str2) {
+char* Math::Add(const char* str1, const char* str2) {
     char* result = new char[std::strlen(str1) + std::strlen(str2) + 1];
+    if(strcmp(str1,nullptr)==0|| strcmp(str2, nullptr)==0)
+        return nullptr;
     std::strcpy(result, str1);
     std::strcat(result, str2);
     return result;

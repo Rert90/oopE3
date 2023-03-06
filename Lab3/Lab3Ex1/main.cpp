@@ -3,8 +3,8 @@
 
 int main() {
     int result = Math::Add(3, 4, 5, 6);
-   std:: cout<<result<<" ";
-   std::cout<<Math::Mul(3.5,2.3)<<" ";
-   std::cout<<Math::Add("V","C");
+    printf("%d\n",result);
+   printf("%d\n",Math::Mul(3.5,2.3));
+    printf("%s",Math::Add('a','b'));
     return 0;
 }
