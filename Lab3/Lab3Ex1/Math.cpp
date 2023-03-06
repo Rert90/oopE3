@@ -4,6 +4,7 @@
 
 #include "Math.h"
 #include <cstdarg>
+#include "cstring"
 
 int Math::Add(int a1,int a2) {
     return a1+a2 ;
@@ -45,7 +46,7 @@ int Math::Add(int count,...) {
 #include <cstring>
 
 char* Add(const char* str1, const char* str2) {
-    char* result = new char[std::strlen(str1) + std::strlen(str2) + 1]; 
+    char* result = new char[std::strlen(str1) + std::strlen(str2) + 1];
     std::strcpy(result, str1);
     std::strcat(result, str2);
     return result;
