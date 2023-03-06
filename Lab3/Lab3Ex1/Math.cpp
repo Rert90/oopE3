@@ -44,11 +44,10 @@ int Math::Add(int count,...) {
     return sum;
 }
 char* Math::Add(const char* str1, const char* str2) {
-    char* result =new char[strlen(str1) + strlen(str2) + 1];
-    if(strcmp(str1,nullptr)==0|| strcmp(str2, nullptr)==0)
+    if(str1== nullptr||str2== nullptr)
         return nullptr;
-    else
-    {strcpy(result, str1);
+    char* result =new char[strlen(str1) + strlen(str2) + 1];
+    strcpy(result, str1);
     strcat(result, str2);
-    return result;}
+    return result;
 }
