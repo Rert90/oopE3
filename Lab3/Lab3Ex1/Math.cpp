@@ -43,8 +43,6 @@ int Math::Add(int count,...) {
     va_end(v);
     return sum;
 }
-#include <cstring>
-
 char* Math::Add(const char* str1, const char* str2) {
     char* result =new char[strlen(str1) + strlen(str2) + 1];
     if(strcmp(str1,nullptr)==0|| strcmp(str2, nullptr)==0)
