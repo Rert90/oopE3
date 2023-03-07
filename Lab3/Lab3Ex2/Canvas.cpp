@@ -1,87 +1,131 @@
 #include "Canvas.h"
 #include <iostream>
-#include <cmath>
+
+using namespace std;
 
 Canvas::Canvas(int width, int height)
-        : width_(width), height_(height), pixels_(height, std::vector<char>(width, ' ')) {}
-
-void Canvas::DrawCircle(int x, int y, int ray, char ch) {
-
-}
-
-void Canvas::FillCircle(int x, int y, int ray, char ch) {
-
-}
-
-void Canvas::DrawRect(int left, int top, int right, int bottom, char ch) {
-    for (int i = left; i <= right; ++i) {
-        SetPoint(i, top, ch);
-        SetPoint(i, bottom, ch);
-    }
-    for (int i = top; i <= bottom; ++i) {
-        SetPoint(left, i, ch);
-        SetPoint(right, i, ch);
+{
+    this->width = width;
+    this->height = height;
+    matrix = new char*[height];
+    for (int i = 0; i < height; i++)
+    {
+        matrix[i] = new char[width];
+        for (int j = 0; j < width; j++)
+        {
+            matrix[i][j] = ' ';
+        }
     }
 }
 
-void Canvas::FillRect(int left, int top, int right, int bottom, char ch) {
-    for (int i = top; i <= bottom; ++i) {
-        for (int j = left; j <= right; ++j) {
+void Canvas::DrawCircle(int x, int y, int ray, char ch)
+{
+    for (int i = y - ray; i <= y + ray; i++)
+    {
+        for (int j = x - ray; j <= x + ray; j++)
+        {
+            if ((i - y) * (i - y) + (j - x) * (j - x) <= ray * ray)
+            {
+                if (i >= 0 && i < height && j >= 0 && j < width)
+                {
+                    matrix[i][j] = ch;
+                }
+            }
+        }
+    }
+}
+
+void Canvas::FillCircle(int x, int y, int ray, char ch)
+{
+    for (int i = y - ray; i <= y + ray; i++)
+    {
+        for (int j = x - ray; j <= x + ray; j++)
+        {
+            if ((i - y) * (i - y) + (j - x) * (j - x) <= ray * ray)
+            {
+                SetPoint(j, i, ch);
+            }
+        }
+    }
+}
+
+void Canvas::DrawRect(int left, int top, int right, int bottom, char ch)
+{
+    for (int i = top; i <= bottom; i++)
+    {
+        for (int j = left; j <= right; j++)
+        {
+            if ((i == top || i == bottom) && j >= left && j <= right)
+            {
+                SetPoint(j, i, ch);
+            }
+            else if ((j == left || j == right) && i >= top && i <= bottom)
+            {
+                SetPoint(j, i, ch);
+            }
+        }
+    }
+}
+
+void Canvas::FillRect(int left, int top, int right, int bottom, char ch)
+{
+    for (int i = top; i <= bottom; i++)
+    {
+        for (int j = left; j <= right; j++)
+        {
             SetPoint(j, i, ch);
         }
     }
 }
 
-void Canvas::SetPoint(int x, int y, char ch) {
-    if (x >= 0 && x < width_ && y >= 0 && y < height_) {
-        pixels_[y][x] = ch;
+void Canvas::SetPoint(int x, int y, char ch)
+{
+    if (y >= 0 && y < height && x >= 0 && x < width)
+    {
+        matrix[y][x] = ch;
     }
 }
 
-void Canvas::DrawLine(int x1, int y1, int x2, int y2, char ch) {
-    // Bresenham's line algorithm
-    const bool steep = std::abs(y2 - y1) > std::abs(x2 - x1);
-    if (steep) {
-        std::swap(x1, y1);
-        std::swap(x2, y2);
+void Canvas::DrawLine(int x1, int y1, int x2, int y2, char ch)
+{
+    int dx = x2 - x1;
+    int dy = y2 - y1;
+    int steps = abs(dx) > abs(dy) ? abs(dx) : abs(dy);
+    float xIncrement = dx / (float)steps;
+    float yIncrement = dy / (float)steps;
+    float x = x1, y = y1;
+    for (int i = 0; i <= steps; i++)
+    {
+        SetPoint((int)x, (int)y, ch);
+        x += xIncrement;
+        y += yIncrement;
     }
-    if (x1 > x2) {
-        std::swap(x1, x2);
-        std::swap(y1, y2);
-    }
-    const float dx = x2 - x1;
-    const float dy = std::abs(y2 - y1);
-    float error = dx / 2.0f;
-    const int ystep = (y1 < y2) ? 1 : -1;
-    int y = static_cast<int>(y1);
-    const int maxX = static_cast<int>(x2);
-    for (int x = static_cast<int>(x1); x <= maxX; x++) {
-        if (steep) {
-            SetPoint(y, x, ch);
-        } else {
-            SetPoint(x, y, ch);
-            error -= dy;
-            if (error < 0) {
-                y += ystep;
-                error += dx;
-            }
+}
+
+void Canvas::Print() {
+    for (int i = 0; i < height; i++) {
+        for (int j = 0; j < width; j++) {
+            cout << matrix[i][j];
         }
+        cout << endl;
     }
 
-    void Canvas::Print() const {
-        for (int i = 0; i < height_; ++i) {
-            for (int j = 0; j < width_; ++j) {
-                std::cout << pixels_[i][j];
-            }
-            std::cout << '\n';
+}void Canvas::Clear()
+{
+    for (int i = 0; i < height; i++)
+    {
+        for (int j = 0; j < width; j++)
+        {
+            matrix[i][j] = ' ';
         }
     }
+}
 
-    void Canvas::Clear() {
-        for (int i = 0; i < height_; ++i) {
-            for (int j = 0; j < width_; ++j) {
-                pixels_[i][j] = ' ';
-            }
-        }
+Canvas::~Canvas()
+{
+    for (int i = 0; i < height; i++)
+    {
+        delete[] matrix[i];
     }
+    delete[] matrix;
 }

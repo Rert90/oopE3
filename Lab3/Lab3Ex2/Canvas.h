@@ -1,17 +1,15 @@
-
-#ifndef LAB3EX2_CANVAS_H
-#define LAB3EX2_CANVAS_H
 #pragma once
 
-#include <vector>
-
-class Canvas {
+class Canvas
+{
 private:
-    int width_;
-    int height_;
-    std::vector<std::vector<char>> pixels_;
+    int width;
+    int height;
+    char** matrix;
+
 public:
     Canvas(int width, int height);
+    ~Canvas();
     void DrawCircle(int x, int y, int ray, char ch);
     void FillCircle(int x, int y, int ray, char ch);
     void DrawRect(int left, int top, int right, int bottom, char ch);
@@ -21,5 +19,3 @@ public:
     void Print();
     void Clear();
 };
-
-#endif //LAB3EX2_CANVAS_H
