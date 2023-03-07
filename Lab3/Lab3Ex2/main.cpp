@@ -2,10 +2,11 @@
 
 int main()
 {
-    Canvas canvas(30, 20);
+    Canvas canvas(50, 50);
 
     // Draw a circle
-    canvas.DrawCircle(12, 10, 5, '.');
+    canvas.DrawCircle(10, 10, 10, '.');
+    canvas.FillCircle(10,10,10,'.');
     canvas.Print();
     canvas.Clear();
 
