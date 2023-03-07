@@ -20,20 +20,34 @@ Canvas::Canvas(int width, int height)
 
 void Canvas::DrawCircle(int x, int y, int ray, char ch)
 {
-    for (int i = y - ray; i <= y + ray; i++)
+    int cx = ray;
+    int cy = 0;
+    int d = 1 - ray;
+
+    while (cx >= cy)
     {
-        for (int j = x - ray; j <= x + ray; j++)
+        SetPoint(x + cx, y + cy, ch);
+        SetPoint(x - cx, y + cy, ch);
+        SetPoint(x + cx, y - cy, ch);
+        SetPoint(x - cx, y - cy, ch);
+        SetPoint(x + cy, y + cx, ch);
+        SetPoint(x - cy, y + cx, ch);
+        SetPoint(x + cy, y - cx, ch);
+        SetPoint(x - cy, y - cx, ch);
+
+        cy++;
+        if (d < 0)
         {
-            if ((i - y) * (i - y) + (j - x) * (j - x) <= ray * ray)
-            {
-                if (i >= 0 && i < height && j >= 0 && j < width)
-                {
-                    matrix[i][j] = ch;
-                }
-            }
+            d += 2 * cy + 1;
+        }
+        else
+        {
+            cx--;
+            d += 2 * (cy - cx) + 1;
         }
     }
 }
+
 
 void Canvas::FillCircle(int x, int y, int ray, char ch)
 {
