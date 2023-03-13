@@ -62,15 +62,18 @@ Sort::Sort(int count, ...) {
     this->count=count;
     va_list v;
     va_start(v,count);
+    int* tempArray = new int[count];
     for(int i=0;i<count;i++) {
-        va_arg(v, int);
-
+        tempArray[i]= va_arg(v,int);
     }
+    quickSort(tempArray,0, count-1,true);
+
     va_end(v);
+    delete[] tempArray;
 }
 void Sort::Print() {
     for(int i=0;i<count;i++)
-        printf("%d ",vector);
+        printf("%d ",vector[i]);
 }
 int Sort::GetElementsCount() {
     int elem=0;
@@ -129,7 +132,7 @@ int Sort::GetElementFromIndex(int index) {
     return vector[index];
 }
 Sort::Sort(char *c) {
-    for (int i = 0; i < count; i++) {
-        vector[i] = c[i] - '\0';
-    }
+    if(c== nullptr)
+        return;
+    int i=1;
 }
