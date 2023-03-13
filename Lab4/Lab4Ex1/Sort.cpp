@@ -128,3 +128,8 @@ void Sort::QuickSort(bool ascendent)
 int Sort::GetElementFromIndex(int index) {
     return vector[index];
 }
+Sort::Sort(char *c) {
+    for (int i = 0; i < count; i++) {
+        vector[i] = c[i] - '\0';
+    }
+}
