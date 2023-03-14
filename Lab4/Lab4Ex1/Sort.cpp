@@ -1,13 +1,10 @@
-//
-// Created by Olariu Robert on 08.03.2023.
-//
-
 #include "Sort.h"
 #include <cstdio>
 #include <ctime>
+#include "iostream"
 #include <cstdlib>
 #include <cstdarg>
-
+using namespace std;
 void swap(int& a, int& b)
 {
     int aux = a;
@@ -72,8 +69,8 @@ Sort::Sort(int count, ...) {
     delete[] tempArray;
 }
 void Sort::Print() {
-    for(int i=0;i<count;i++)
-        printf("%d ",vector[i]);
+    for(int i=0;i<this->count;i++)
+        printf("%d %s ",this->vector[i]);
 }
 int Sort::GetElementsCount() {
     int elem=0;
@@ -129,10 +126,14 @@ void Sort::QuickSort(bool ascendent)
 
 
 int Sort::GetElementFromIndex(int index) {
-    return vector[index];
+    return this->vector[index];
 }
 Sort::Sort(char *c) {
-    if(c== nullptr)
+    if(c == nullptr)
         return;
-    int i=1;
+
 }
+Sort::Sort():vector(new int[this->count]{}){
+
+}
+
