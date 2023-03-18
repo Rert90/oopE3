@@ -68,13 +68,17 @@ Sort::Sort(int count, ...) {
     va_end(v);
     delete[] tempArray;
 }
-void Sort::Print() {
-    for(int i=0;i<this->count;i++)
-        printf("%d %s ",this->vector[i]);
-}
 int Sort::GetElementsCount() {
-    int elem=0;
+    return this->count;
 }
+int Sort::GetElementFromIndex(int index) {
+    if (index < 0 || index >= this->count) {
+        std::cerr << "Index out of bounds." << std::endl;
+        return -1;  // Or some other error value.
+    }
+    return this->vector[index];
+}
+
 
 void Sort::BubbleSort(bool ascendent)
 {
@@ -86,14 +90,7 @@ void Sort::BubbleSort(bool ascendent)
             if (this->vector[i] > this->vector[j])
                 swap(this->vector[j], this->vector[i]);
 }
-Sort::Sort(int count, int min, int max) {
-    this->count=count;
-    time_t t;
-    srand((unsigned) time(&t));
-    for(int i=0;i<count;i++){
 
-    }
-}
 
 void Sort::InsertSort(bool ascendent)
 {
@@ -122,18 +119,65 @@ void Sort::QuickSort(bool ascendent)
     quickSort(this->vector, 0, this->count - 1, ascendent);
 
 }
-
-
-
-int Sort::GetElementFromIndex(int index) {
-    return this->vector[index];
+Sort::Sort(int* vector, int count) : count(count)
+{
+    this->vector = new int[count];
+    for (int i = 0; i < count; i++) {
+        this->vector[i] = vector[i];
+    }
 }
-Sort::Sort(char *c) {
-    if(c == nullptr)
+
+Sort::Sort() : count(0), vector(nullptr) {}
+
+Sort::Sort(int count, int min, int max) : count(count)
+{
+    vector = new int[count];
+    srand(time(NULL));
+    for (int i = 0; i < count; i++) {
+        vector[i] = rand() % (max - min + 1) + min;
+    }
+}
+
+void Sort::Print()
+{
+    if (this->count == 0)
+    {
+        cout << "The list is empty!" << endl;
         return;
+    }
 
+    cout << "Sorted list: ";
+    for (int i = 0; i < this->count; i++)
+    {
+        cout << this->vector[i];
+        if (i != this->count - 1)
+        {
+            cout << ", ";
+        }
+    }
+    cout << endl;
 }
-Sort::Sort():vector(new int[this->count]{}){
+Sort::Sort(char* c) {
+    // First, count the number of elements in the string
+    int length = strlen(c);
+    int count = 1;
+    for (int i = 0; i < length; i++) {
+        if (c[i] == ',') {
+            count++;
+        }
+    }
 
+    // Allocate memory for the vector
+    this->vector = new int[count];
+    this->count = count;
+
+    // Parse the string and fill the vector
+    char* token = strtok(c, ",");
+    int index = 0;
+    while (token != NULL) {
+        int value = atoi(token);
+        this->vector[index] = value;
+        token = strtok(NULL, ",");
+        index++;
+    }
 }
-
