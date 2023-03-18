@@ -3,4 +3,4 @@ project(Lab5ex1)
 
 set(CMAKE_CXX_STANDARD 23)
 
-add_executable(Lab5ex1 main.cpp)
+add_executable(Lab5ex1 main.cpp Number.cpp Number.h)
