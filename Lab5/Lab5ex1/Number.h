@@ -10,8 +10,7 @@
 
 class Number
 {
-    // add data members
-    char* number_base_b;
+    char* number_base;
     int number_base_10;
     int base;
     int digits;
@@ -22,7 +21,7 @@ public:
     Number(const Number&& n);
     ~Number();
 
-    char operator[](int);
+    char operator[](int index);
     friend Number operator+(Number x, Number y);
     friend Number operator+=(Number x, Number y);
     friend Number operator-(Number x, Number y);

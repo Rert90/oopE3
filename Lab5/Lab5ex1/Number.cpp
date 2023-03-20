@@ -3,7 +3,7 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <cstring>
 
-Number::Number(const char* value, int base):number_base_10(0),number_base_b(nullptr),base(base),digits(0)
+Number::Number(const char* value, int base):number_base_10(0),number_base(nullptr),base(base),digits(0)
 {
     const char* end = value;
     while (*end != '\0') {
@@ -11,9 +11,9 @@ Number::Number(const char* value, int base):number_base_10(0),number_base_b(null
         end++;
     }
 
-    number_base_b = new char[digits]; //aloc memorie pt nume
-    number_base_b=(char*)memcpy(number_base_b, value, digits * sizeof(char));
-    number_base_b[digits] = '\0';
+    number_base = new char[digits]; //aloc memorie pt nume
+    number_base=(char*)memcpy(number_base, value, digits * sizeof(char));
+    number_base[digits] = '\0';
 
 
     if(base<=10)
@@ -57,22 +57,22 @@ Number::Number(int value)
     digits = 0;
     base = 10;
     number_base_10 = value;
-    number_base_b = new char[15];
+    number_base = new char[15];
     for (int i = 0; i >= 0 && value != 0; i++)
     {
-        number_base_b[i] = value % 10 + '0';
+        number_base[i] = value % 10 + '0';
         digits++;
         value /= 10;
     }
-    number_base_b[digits] = '\0';
+    number_base[digits] = '\0';
     for (int i = 0; i < (digits - 1) / 2; i++)
-        std::swap(number_base_b[i], number_base_b[digits - 1 - i]);
+        std::swap(number_base[i], number_base[digits - 1 - i]);
 
 }
 
 Number::Number(const Number& n)
 {
-    this->number_base_b = n.number_base_b;
+    this->number_base = n.number_base;
     this->number_base_10 = n.number_base_10;
     this->digits = n.digits;
     this->base = n.base;
@@ -81,30 +81,30 @@ Number::Number(const Number& n)
 Number::Number(const Number&& n)
 {
     this->number_base_10 = n.number_base_10;
-    strcpy(number_base_b, n.number_base_b);
+    strcpy(number_base, n.number_base);
     this->base = n.base;
     this->digits = n.digits;
 }
 
 Number::~Number()
 {
-    if (number_base_b != nullptr)
-        delete[]number_base_b;
-    number_base_b = nullptr;
+    if (number_base != nullptr)
+        delete[]number_base;
+    number_base = nullptr;
 }
 
-char Number::operator[](int val)
+char Number::operator[](int index)
 {
-    return number_base_b[val];
+    return number_base[index];
 }
 
 Number* Number::operator--()
 {
-    number_base_b++;
+    number_base++;
     digits--;
     number_base_10 = 0;
     for (int i = 0; i < digits; i++)
-        number_base_10=number_base_10*10+number_base_b[i] - '0';
+        number_base_10=number_base_10*10+number_base[i] - '0';
     return this;
 }
 
@@ -113,16 +113,16 @@ int Number::operator=(int x)
     digits = 0;
     base = 10;
     number_base_10 = x;
-    number_base_b = new char[15];
+    number_base = new char[15];
     for (int i = 0; i >= 0 && x != 0; i++)
     {
-        number_base_b[i] = x % 10 + '0';
+        number_base[i] = x % 10 + '0';
         digits++;
         x /= 10;
     }
-    number_base_b[digits] = '\0';
+    number_base[digits] = '\0';
     for (int i = 0; i < (digits - 1) / 2; i++)
-        std::swap(number_base_b[i], number_base_b[digits-1-i]);
+        std::swap(number_base[i], number_base[digits-1-i]);
     return 0;
 }
 
@@ -132,14 +132,14 @@ int Number::operator=(const char* x)
     digits = 0;
     base = 10;
     number_base_10 = 0;
-    number_base_b = new char[15];
+    number_base = new char[15];
     for (int i = 0; x[i]>='0'&&x[i]<='9'; i++)
     {
-        number_base_b[i] = x[i];
+        number_base[i] = x[i];
         number_base_10 = number_base_10 * 10 + x[i]-'0';
         digits++;
     }
-    number_base_b[digits] = '\0';
+    number_base[digits] = '\0';
     return 0;
 }
 
@@ -171,10 +171,10 @@ void Number::SwitchBase(int newBase)
         aux = aux / newBase;
     }
 
-    number_base_b = new char[digits];
+    number_base = new char[digits];
     for (int i = 0; i < digits; i++)
-        number_base_b[i] = temp[j--];
-    number_base_b[digits] = '\0';
+        number_base[i] = temp[j--];
+    number_base[digits] = '\0';
     base = newBase;
 }
 
@@ -182,7 +182,7 @@ void Number::Print()
 {
     std::cout << "Numarul " << number_base_10 << " scris in baza " << base << " este: ";
     for (int i = 0; i < digits; i++)
-        std::cout << number_base_b[i];
+        std::cout << number_base[i];
     std::cout << std::endl;
 }
 
@@ -237,8 +237,8 @@ Number operator+( Number x,  Number y)
 
 Number operator+=(Number x, Number y)
 {
-    x = x + y;
-    return x;
+
+    return x+y;
 }
 
 Number operator-(Number x, Number y)
@@ -288,7 +288,7 @@ bool operator>(Number x, Number y)
 
 Number* operator--(Number& num, int value)
 {
-    num.number_base_b[num.digits - 1] = '\0';
+    num.number_base[num.digits - 1] = '\0';
     num.digits--;
     num.number_base_10 /= 10;
     return &num;
