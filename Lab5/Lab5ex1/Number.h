@@ -6,35 +6,36 @@
 #define LAB5EX1_NUMBER_H
 #pragma once
 
-class Number {
+
+
+class Number
+{
+    // add data members
+    char* number_base_b;
+    int number_base_10;
+    int base;
+    int digits;
 public:
-    Number(const char* value, int base);
-    Number(const Number& other);
-    Number(Number&& other) noexcept;
+    Number(const char* value, int base); // where base is between 2 and 16
+    Number(int value);
+    Number(const Number& n);
+    Number(const Number&& n);
     ~Number();
 
-    Number& operator=(const Number& other);
-    Number& operator=(Number&& other) noexcept;
-    Number operator+(const Number& other) const;
-    Number operator-(const Number& other) const;
-    char operator[](int index) const;
-    bool operator>(const Number& other) const;
-    bool operator<(const Number& other) const;
-    bool operator>=(const Number& other) const;
-    bool operator<=(const Number& other) const;
-    bool operator==(const Number& other) const;
-
+    char operator[](int);
+    friend Number operator+(Number x, Number y);
+    friend Number operator+=(Number x, Number y);
+    friend Number operator-(Number x, Number y);
+    friend bool operator>(Number x, Number y);
+    Number* operator--();
+    friend Number* operator--(Number& num,int value);
+    int operator=(int x);
+    int operator=(const char* x);
     void SwitchBase(int newBase);
-    void Print() const;
-    int GetDigitsCount() const;
-    int GetBase() const;
-
-private:
-    char* m_value;
-    int m_base;
-    int m_digitsCount;
+    void Print();
+    int  GetDigitsCount(); // returns the number of digits for the current number
+    int  GetBase(); // returns the current base
 };
-
 
 
 

@@ -1,4 +1,5 @@
 #include <iostream>
+#include "Number.h"
 
 int main(){
     Number n1("10110010",2);
