@@ -28,7 +28,7 @@ public:
     friend bool operator>(Number x, Number y);
     Number* operator--();
     friend Number* operator--(Number& num,int value);
-    int operator=(int x);
+    Number& operator=(int x);
     int operator=(const char* x);
     void SwitchBase(int newBase);
     void Print();
