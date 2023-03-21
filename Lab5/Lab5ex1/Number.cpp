@@ -108,7 +108,7 @@ Number* Number::operator--()
     return this;
 }
 
-int Number::operator=(int x)
+Number& Number::operator=(int x)
 {
     digits = 0;
     base = 10;
