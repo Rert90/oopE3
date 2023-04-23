@@ -55,7 +55,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "/Users/olariurobert/projects/oopE3/oopE3/Lab5/Lab5ex1/cmake-build-debug"
+			"value" : "/Users/olariurobert/projects/oopE3/oopE3/Lab8/cmake-build-debug"
 		},
 		{
 			"name" : "CMAKE_CACHE_MAJOR_VERSION",
@@ -479,7 +479,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "/Users/olariurobert/projects/oopE3/oopE3/Lab5/Lab5ex1/cmake-build-debug/CMakeFiles/pkgRedirects"
+			"value" : "/Users/olariurobert/projects/oopE3/oopE3/Lab8/cmake-build-debug/CMakeFiles/pkgRedirects"
 		},
 		{
 			"name" : "CMAKE_GENERATOR",
@@ -539,7 +539,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "/Users/olariurobert/projects/oopE3/oopE3/Lab5/Lab5ex1"
+			"value" : "/Users/olariurobert/projects/oopE3/oopE3/Lab8"
 		},
 		{
 			"name" : "CMAKE_INSTALL_NAME_TOOL",
@@ -771,7 +771,7 @@
 				}
 			],
 			"type" : "PATH",
-			"value" : "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk"
+			"value" : "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk"
 		},
 		{
 			"name" : "CMAKE_PLATFORM_INFO_INITIALIZED",
@@ -819,7 +819,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "Lab5ex1"
+			"value" : "Lab8"
 		},
 		{
 			"name" : "CMAKE_RANLIB",
@@ -1102,7 +1102,7 @@
 			"value" : "FALSE"
 		},
 		{
-			"name" : "Lab5ex1_BINARY_DIR",
+			"name" : "Lab8_BINARY_DIR",
 			"properties" : 
 			[
 				{
@@ -1111,10 +1111,10 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "/Users/olariurobert/projects/oopE3/oopE3/Lab5/Lab5ex1/cmake-build-debug"
+			"value" : "/Users/olariurobert/projects/oopE3/oopE3/Lab8/cmake-build-debug"
 		},
 		{
-			"name" : "Lab5ex1_IS_TOP_LEVEL",
+			"name" : "Lab8_IS_TOP_LEVEL",
 			"properties" : 
 			[
 				{
@@ -1126,7 +1126,7 @@
 			"value" : "ON"
 		},
 		{
-			"name" : "Lab5ex1_SOURCE_DIR",
+			"name" : "Lab8_SOURCE_DIR",
 			"properties" : 
 			[
 				{
@@ -1135,7 +1135,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "/Users/olariurobert/projects/oopE3/oopE3/Lab5/Lab5ex1"
+			"value" : "/Users/olariurobert/projects/oopE3/oopE3/Lab8"
 		}
 	],
 	"kind" : "cache",
