@@ -21,25 +21,26 @@ int main() {
     ifstream input_file(inputFile);
     if (!input_file.is_open()) {
         cerr << "Failed to open to file!" << endl;
-        return 1;
+        return 0;
     }
+    
     string sentence;
     getline(input_file, sentence);
     input_file.close();
     string delimiters = " ,.!?";
     map<string, int> word_count;
-    size_t start = 0, end = 0;
+    size_t start = 0, end;
 
     while ((end = sentence.find_first_of(delimiters, start)) != string::npos) {
         string word = sentence.substr(start, end - start);
-        for (char &c: word) c = ::tolower(c);
+        for (char &c: word) { c = tolower(c); }
         if (!word.empty()) word_count[word]++;
         start = sentence.find_first_not_of(delimiters, end);
     }
 
     priority_queue<pair<string, int>, vector<pair<string, int>>, CompareWords> sorted_words;
     for (const auto &entry: word_count) {
-        sorted_words.push(entry);
+        sorted_words.emplace(entry);
     }
     while (!sorted_words.empty()) {
         pair<string, int> word_entry = sorted_words.top();
