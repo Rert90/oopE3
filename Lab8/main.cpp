@@ -23,7 +23,7 @@ int main() {
         cerr << "Failed to open to file!" << endl;
         return 0;
     }
-    
+
     string sentence;
     getline(input_file, sentence);
     input_file.close();
